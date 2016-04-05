@@ -22,7 +22,10 @@ dependencies {
 }
 
 group = 'com.github.scobal.eslint'
-version = '1.0.0'
+version = '1.0.1'
+
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
 
 pluginBundle {
     website = 'https://github.com/scobal/gradle-eslint-plugin'
