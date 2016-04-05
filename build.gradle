@@ -19,6 +19,7 @@ repositories {
 dependencies {
     compile gradleApi()
     compile localGroovy()
+    testCompile 'junit:junit:4.12'
 }
 
 group = 'com.github.scobal.eslint'

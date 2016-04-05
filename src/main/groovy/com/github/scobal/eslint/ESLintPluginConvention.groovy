@@ -21,6 +21,17 @@ class ESLintPluginConvention {
     def List<String> inputs = null
     def String config = null
     def Boolean noEslintrc = null
+    def List<String> env = null
+    def List<String> ext = null
+    def List<String> global = null
+    def String parser = null
+    def Object parserOptions = null
+    def Boolean cache = null
+    def String cacheFile = null
+    def String cacheLocation = null
+    def List<String> rulesDir = null
+    def List<String> plugin = null
+    def Object rule = null
 
     def ESLintPluginConvention(Project project) {
 
@@ -31,7 +42,7 @@ class ESLintPluginConvention {
         closure()
     }
 
-    def getArguments() {
+    def List getArguments() {
         def args = []
 
         if (config != null) {
@@ -39,6 +50,46 @@ class ESLintPluginConvention {
         }
         if (noEslintrc != null) {
             args += ['--no-eslintrc', noEslintrc]
+        }
+        if (env != null) {
+            args += '--env'
+            args += env
+        }
+        if (ext != null) {
+            args += '--ext'
+            args += ext
+        }
+        if (global != null) {
+            args += '--global'
+            args += global
+        }
+        if (parser != null) {
+            args += ['--parser', parser]
+        }
+        if (parserOptions != null) {
+            args += '--parser-options'
+            args += parserOptions
+        }
+        if (cache != null) {
+            args += ['--cache', cache]
+        }
+        if (cacheFile != null) {
+            args += ['--cache-file', cacheFile]
+        }
+        if (cacheLocation != null) {
+            args += ['--cache-location', cacheLocation]
+        }
+        if (rulesDir != null) {
+            args += '--rulesdir'
+            args += rulesDir
+        }
+        if (plugin != null) {
+            args += '--plugin'
+            args += plugin
+        }
+        if (rule != null) {
+            args += '--rule'
+            args += rule
         }
         if (inputs != null) {
             args += inputs
