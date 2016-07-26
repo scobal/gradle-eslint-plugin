@@ -14,6 +14,7 @@
 package com.github.scobal.eslint
 
 import org.gradle.api.Project
+import org.apache.tools.ant.taskdefs.condition.Os
 
 class ESLintPluginConvention {
 
