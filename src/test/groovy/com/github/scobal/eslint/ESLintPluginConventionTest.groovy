@@ -53,6 +53,8 @@ class ESLintPluginConventionTest {
         assertNull(convention.getRulesDir())
         assertNull(convention.getPlugin())
         assertNull(convention.getRule())
+		assertNull(convention.getOutput())
+		assertNull(convention.getFormat())		
     }
 
     @Test
@@ -76,9 +78,13 @@ class ESLintPluginConventionTest {
         convention.setRulesDir(["rules_dir1", "rules_dir2"])
         convention.setPlugin(["plugin1", "plugin2"])
         convention.setRule(["rule:1", "rule:2"])
+		convention.setFormat("checktyle")
+		convention.setOutput("report.out")
 
 
-        assertEquals(["--config", "esconfig",
+        assertEquals(["--format", "checktyle",
+					  "--output-file", "report.out",
+					  "--config", "esconfig",
                       "--no-eslintrc", true,
                       "--env", "env1", "env2",
                       "--ext", "ext1", "ext2",

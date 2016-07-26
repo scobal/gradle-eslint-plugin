@@ -54,6 +54,8 @@ This is a list of the available options for use inside the `eslint` configuratio
 | `rulesDir` | A list of directories with additional rules, eg: `["/eslint/rules_1", "/eslint/rules_2"]`
 | `plugin` | A list of plugins as strings, eg: `["plugin_1", "plugin_2"]`
 | `rule` | Specify rules
+| `output` | Enable report to be written to a file
+| `format` | his option specifies the output format for the console, eg: "checkstyle"
 
 ## License
 
