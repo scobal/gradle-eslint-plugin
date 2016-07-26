@@ -32,7 +32,12 @@ class ESLintPluginConventionTest {
 
     @Test
     def void testDefaults() {
-        assertEquals("eslint", convention.getExecutable())
+	
+		if (Os.isFamily(Os.FAMILY_WINDOWS)) {
+			assertEquals("eslint.cmd", convention.getExecutable())
+		} else {
+			assertEquals("eslint", convention.getExecutable())
+		}
         assertNull(convention.getInputs())
         assertNull(convention.getConfig())
         assertNull(convention.getNoEslintrc())
