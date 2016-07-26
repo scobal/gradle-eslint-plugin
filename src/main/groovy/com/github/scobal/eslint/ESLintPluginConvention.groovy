@@ -34,7 +34,9 @@ class ESLintPluginConvention {
     def Object rule = null
 
     def ESLintPluginConvention(Project project) {
-
+		if (Os.isFamily(Os.FAMILY_WINDOWS)) {
+			executable += '.cmd'
+		}
     }
 
     def eslint(Closure closure) {
