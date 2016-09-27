@@ -54,6 +54,8 @@ This is a list of the available options for use inside the `eslint` configuratio
 | `rulesDir` | A list of directories with additional rules, eg: `["/eslint/rules_1", "/eslint/rules_2"]`
 | `plugin` | A list of plugins as strings, eg: `["plugin_1", "plugin_2"]`
 | `rule` | Specify rules
+| `outputFile` | The path to the output file, eg: `"/home/scobal/report.out"`
+| `format` | The format of the output file, eg: `"checkstyle"`
 
 ## License
 

@@ -14,6 +14,7 @@
 package com.github.scobal.eslint
 
 import org.gradle.api.Project
+import org.apache.tools.ant.taskdefs.condition.Os
 
 class ESLintPluginConvention {
 
@@ -32,9 +33,13 @@ class ESLintPluginConvention {
     def List<String> rulesDir = null
     def List<String> plugin = null
     def Object rule = null
+    def String outputFile = null;
+    def String format = null;
 
     def ESLintPluginConvention(Project project) {
-
+        if (Os.isFamily(Os.FAMILY_WINDOWS)) {
+            executable += '.cmd'
+        }
     }
 
     def eslint(Closure closure) {
@@ -91,6 +96,13 @@ class ESLintPluginConvention {
             args += '--rule'
             args += rule
         }
+        if (format != null) {
+            args += ['--format', format]
+        }
+        if (outputFile != null) {
+            args += ['--output-file', outputFile]
+        }
+
         if (inputs != null) {
             args += inputs
         }
