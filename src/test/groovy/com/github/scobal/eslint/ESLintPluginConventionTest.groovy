@@ -13,6 +13,7 @@
  */
 package com.github.scobal.eslint
 
+import org.apache.tools.ant.taskdefs.condition.Os
 import org.gradle.api.Project
 import org.gradle.testfixtures.ProjectBuilder
 import org.junit.*
@@ -32,7 +33,12 @@ class ESLintPluginConventionTest {
 
     @Test
     def void testDefaults() {
-        assertEquals("eslint", convention.getExecutable())
+	
+		if (Os.isFamily(Os.FAMILY_WINDOWS)) {
+			assertEquals("eslint.cmd", convention.getExecutable())
+		} else {
+			assertEquals("eslint", convention.getExecutable())
+		}
         assertNull(convention.getInputs())
         assertNull(convention.getConfig())
         assertNull(convention.getNoEslintrc())
@@ -47,6 +53,8 @@ class ESLintPluginConventionTest {
         assertNull(convention.getRulesDir())
         assertNull(convention.getPlugin())
         assertNull(convention.getRule())
+		assertNull(convention.getOutput())
+		assertNull(convention.getFormat())		
     }
 
     @Test
@@ -70,9 +78,13 @@ class ESLintPluginConventionTest {
         convention.setRulesDir(["rules_dir1", "rules_dir2"])
         convention.setPlugin(["plugin1", "plugin2"])
         convention.setRule(["rule:1", "rule:2"])
+		convention.setFormat("checktyle")
+		convention.setOutput("report.out")
 
 
-        assertEquals(["--config", "esconfig",
+        assertEquals(["--format", "checktyle",
+					  "--output-file", "report.out",
+					  "--config", "esconfig",
                       "--no-eslintrc", true,
                       "--env", "env1", "env2",
                       "--ext", "ext1", "ext2",
