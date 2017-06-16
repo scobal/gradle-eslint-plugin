@@ -24,10 +24,12 @@ class ESLintPlugin implements Plugin<Project> {
         def esLintPluginConvention = new ESLintPluginConvention(project)
         project.convention.plugins.eslint = esLintPluginConvention
 
-        project.task('eslint') << {
-            project.exec {
-                executable esLintPluginConvention.getExecutable()
-                args esLintPluginConvention.getArguments()
+        project.task('eslint') {
+            doLast {
+                project.exec {
+                    executable esLintPluginConvention.getExecutable()
+                    args esLintPluginConvention.getArguments()
+                }
             }
         }
 
