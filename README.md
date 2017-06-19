@@ -14,7 +14,7 @@ This is a Gradle plugin for running [ESLint](http://eslint.org/) as part of your
                 }
             }
             dependencies {
-                classpath "gradle.plugin.com.github.scobal.eslint:gradle-eslint-plugin:1.0.3"
+                classpath "gradle.plugin.com.github.scobal.eslint:gradle-eslint-plugin:1.0.4"
             }
         }
 
