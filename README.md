@@ -14,7 +14,7 @@ This is a Gradle plugin for running [ESLint](http://eslint.org/) as part of your
                 }
             }
             dependencies {
-                classpath "gradle.plugin.com.github.scobal.eslint:gradle-eslint-plugin:1.0.4"
+                classpath "gradle.plugin.com.github.scobal.eslint:gradle-eslint-plugin:1.0.5"
             }
         }
 
@@ -39,8 +39,10 @@ This is a list of the available options for use inside the `eslint` configuratio
 
 |       Option      | Description |
 | ----------------- |------------ |
-| `executable` | The path to an eslint executable, eg: `"/usr/bin/eslint"` 
-| `inputs` | A list of files, directories and/or globs, eg: `["service.js", "src/controllers/", "**/*.js"]`
+| `executable` | The path to an eslint executable (default is `"eslint"`), eg: `"/usr/bin/eslint"` 
+| `yarnPath` | The path to yarn package manager, which will indicate to plugin to run eslint via yarn rather than directly. This can be either directory containing yarn or full path including yarn executable. Plugin has logic built to add '.cmd' suffix for the Windows Operating System, eg: `"build/yarn/bin"`, `"/usr/bin/yarn"` 
+| `ignoreExitValue` |  Boolean to ignore eslint's exit value (default is `false`), eg: `true`
+| `inputs` | A list of files, directories and/or globs (default is `["src"]`), eg: `["service.js", "src/controllers/", "**/*.js"]`
 | `config` | The path to an eslint configuration file, eg: `"/home/scobal/esconfig"`
 | `noEslintrc` |  Boolean to disable the use of .eslintrc, eg: `true`
 | `env` | A list of environments as strings, eg: `["environment_1", "environment_2"]`

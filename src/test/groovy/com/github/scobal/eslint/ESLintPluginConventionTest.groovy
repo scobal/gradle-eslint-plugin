@@ -38,7 +38,9 @@ class ESLintPluginConventionTest {
         } else {
             assertEquals("eslint", convention.getExecutable())
         }
-        assertNull(convention.getInputs())
+        assertNull(convention.getYarnPath())
+        assertEquals(false, convention.getIgnoreExitValue())
+        assertEquals(['src'], convention.getInputs())
         assertNull(convention.getConfig())
         assertNull(convention.getNoEslintrc())
         assertNull(convention.getEnv())
@@ -56,7 +58,7 @@ class ESLintPluginConventionTest {
 
     @Test
     def void testGetArguments_withDefaultValues() {
-        assertEquals([], convention.getArguments())
+        assertEquals(['src'], convention.getArguments())
     }
 
     @Test

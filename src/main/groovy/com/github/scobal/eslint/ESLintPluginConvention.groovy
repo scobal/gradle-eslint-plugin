@@ -13,13 +13,18 @@
  */
 package com.github.scobal.eslint
 
-import org.gradle.api.Project
 import org.apache.tools.ant.taskdefs.condition.Os
+import org.gradle.api.Project
 
 class ESLintPluginConvention {
 
-    def String executable = 'eslint'
-    def List<String> inputs = null
+    public static final String ESLINT = 'eslint'
+
+    def String executable = ESLINT
+    def String yarnPath = null
+    def boolean ignoreExitValue = false
+
+    def List<String> inputs = ['src']
     def String config = null
     def Boolean noEslintrc = null
     def List<String> env = null
