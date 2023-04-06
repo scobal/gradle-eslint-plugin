@@ -13,10 +13,18 @@
  */
 package com.github.scobal.eslint
 
+import org.apache.tools.ant.taskdefs.condition.Os
 import org.gradle.api.Plugin
 import org.gradle.api.Project
+import org.gradle.language.base.plugins.LifecycleBasePlugin
+
+import java.nio.file.Files
+import java.nio.file.Paths
 
 class ESLintPlugin implements Plugin<Project> {
+
+    private static final String ESLINTIGNORE_FILE = '.eslintignore'
+    private static final String WINDOWS_EXECUTABLE_SUFFIX = '.cmd'
 
     @Override
     void apply(Project project) {
@@ -24,16 +32,71 @@ class ESLintPlugin implements Plugin<Project> {
         def esLintPluginConvention = new ESLintPluginConvention(project)
         project.convention.plugins.eslint = esLintPluginConvention
 
-        project.task('eslint') {
+        def esLintTask = project.tasks.register('eslint') {
+            group = LifecycleBasePlugin.VERIFICATION_GROUP
+            description = 'Runs ESLint.'
+
+            if (new File(project.projectDir, ESLINTIGNORE_FILE).exists()) {
+                inputs.file(ESLINTIGNORE_FILE)
+            }
+
+            outputs.cacheIf { true }
+
             doLast {
                 project.exec {
-                    executable esLintPluginConvention.getExecutable()
-                    args esLintPluginConvention.getArguments()
+                    executable determineExecutable(esLintPluginConvention)
+                    args determineArguments(esLintPluginConvention)
+                    ignoreExitValue = esLintPluginConvention.ignoreExitValue
                 }
             }
         }
 
+        project.afterEvaluate {
+            esLintTask.configure {
+                inputs.files(esLintPluginConvention.inputs)
+
+                if (!esLintPluginConvention.noEslintrc) {
+                    def eslintrcFiles = project.fileTree(dir: project.projectDir, include: '.eslintrc.*')
+                    if (!eslintrcFiles.empty) {
+                        inputs.files(eslintrcFiles)
+                    }
+                }
+
+                outputs.file(esLintPluginConvention.outputFile)
+            }
+        }
+
+        project.tasks.named('check') {
+            dependsOn(esLintTask)
+        }
     }
 
+    private static String determineExecutable(ESLintPluginConvention convention) {
+
+        if (convention.yarnPath == null) {
+            return convention.getExecutable()
+        }
+
+        def executablePath = Paths.get(convention.yarnPath)
+        if (Files.isDirectory(executablePath)) {
+            executablePath = executablePath.resolve('yarn')
+        }
+
+        def executable = executablePath.toString()
+        if (Os.isFamily(Os.FAMILY_WINDOWS) && !executable.endsWith(WINDOWS_EXECUTABLE_SUFFIX)) {
+            executable += WINDOWS_EXECUTABLE_SUFFIX
+        }
+
+        executable
+    }
+
+    private static List<String> determineArguments(ESLintPluginConvention convention) {
+
+        if (convention.yarnPath == null) {
+            return convention.getArguments()
+        }
+
+        [] + ESLintPluginConvention.ESLINT + convention.getArguments()
+    }
 }
 
