@@ -38,6 +38,7 @@ class ESLintPluginConventionTest {
         } else {
             assertEquals("eslint", convention.getExecutable())
         }
+        assertNull(convention.getNodePath())
         assertNull(convention.getYarnPath())
         assertEquals(false, convention.getIgnoreExitValue())
         assertEquals(['src'], convention.getInputs())

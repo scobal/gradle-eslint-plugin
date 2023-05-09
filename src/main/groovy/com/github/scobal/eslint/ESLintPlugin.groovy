@@ -44,6 +44,11 @@ class ESLintPlugin implements Plugin<Project> {
 
             doLast {
                 project.exec {
+                    if (esLintPluginConvention.nodePath != null) {
+                        String environmentPath = getEnvironmentPath(environment)
+                        environment 'PATH', buildEnvironmentPath(esLintPluginConvention.nodePath, environmentPath)
+                    }
+
                     executable determineExecutable(esLintPluginConvention)
                     args determineArguments(esLintPluginConvention)
                     ignoreExitValue = esLintPluginConvention.ignoreExitValue
@@ -69,6 +74,18 @@ class ESLintPlugin implements Plugin<Project> {
         project.tasks.named('check') {
             dependsOn(esLintTask)
         }
+    }
+
+    private static String getEnvironmentPath(Map<String, Object> environment) {
+
+        Os.isFamily(Os.FAMILY_WINDOWS) ? environment.Path : environment.PATH
+    }
+
+    private static String buildEnvironmentPath(String nodePath, String environmentPath) {
+
+        def separator = Os.isFamily(Os.FAMILY_WINDOWS) ? ';' : ':'
+
+        "$nodePath$separator$environmentPath"
     }
 
     private static String determineExecutable(ESLintPluginConvention convention) {

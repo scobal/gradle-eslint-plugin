@@ -21,6 +21,7 @@ class ESLintPluginConvention {
     public static final String ESLINT = 'eslint'
 
     def String executable = ESLINT
+    def String nodePath = null
     def String yarnPath = null
     def boolean ignoreExitValue = false
 
