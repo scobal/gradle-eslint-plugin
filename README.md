@@ -14,7 +14,7 @@ This is a Gradle plugin for running [ESLint](http://eslint.org/) as part of your
                 }
             }
             dependencies {
-                classpath "gradle.plugin.com.github.scobal.eslint:gradle-eslint-plugin:1.0.5"
+                classpath "gradle.plugin.com.github.scobal.eslint:gradle-eslint-plugin:1.0.6"
             }
         }
 
@@ -37,27 +37,28 @@ http://eslint.org/docs/user-guide/command-line-interface
 This is a list of the available options for use inside the `eslint` configuration block:
 
 
-|       Option      | Description |
-| ----------------- |------------ |
-| `executable` | The path to an eslint executable (default is `"eslint"`), eg: `"/usr/bin/eslint"` 
-| `yarnPath` | The path to yarn package manager, which will indicate to plugin to run eslint via yarn rather than directly. This can be either directory containing yarn or full path including yarn executable. Plugin has logic built to add '.cmd' suffix for the Windows Operating System, eg: `"build/yarn/bin"`, `"/usr/bin/yarn"` 
+| Option            | Description |
+|-------------------|------------ |
+| `executable`      | The path to an eslint executable (default is `"eslint"`), eg: `"/usr/bin/eslint"` 
+| `nodePath`        | The path to Node.js will be prefixed to the environemnt path of the executable process. This is needed when the Node.js is not globally installed, eg: `"build/node"` 
+| `yarnPath`        | The path to yarn package manager, which will indicate to plugin to run eslint via yarn rather than directly. This can be either directory containing yarn or full path including yarn executable. Plugin has logic built to add '.cmd' suffix for the Windows Operating System, eg: `"build/yarn/bin"`, `"/usr/bin/yarn"` 
 | `ignoreExitValue` |  Boolean to ignore eslint's exit value (default is `false`), eg: `true`
-| `inputs` | A list of files, directories and/or globs (default is `["src"]`), eg: `["service.js", "src/controllers/", "**/*.js"]`
-| `config` | The path to an eslint configuration file, eg: `"/home/scobal/esconfig"`
-| `noEslintrc` |  Boolean to disable the use of .eslintrc, eg: `true`
-| `env` | A list of environments as strings, eg: `["environment_1", "environment_2"]`
-| `ext` | A list of Javascript file extensions as strings, eg: `[".js", ".jsx"]`
-| `global` | A list of global variables as strings, eg: `["global_1", "global_1"]`
-| `parser` | The parser to be used, eg: `"espree"`
-| `parserOptions` | Specify parser options
-| `cache` | Boolean to only check changed files, eg: `true`
-| `cacheFile` | The path to an eslint cache file, eg: `"/tmp/eslint_cache/file"`
-| `cacheLocation` | The path to an eslint cache file or directory, eg: `"/tmp/eslint_cache"`
-| `rulesDir` | A list of directories with additional rules, eg: `["/eslint/rules_1", "/eslint/rules_2"]`
-| `plugin` | A list of plugins as strings, eg: `["plugin_1", "plugin_2"]`
-| `rule` | Specify rules
-| `outputFile` | The path to the output file, eg: `"/home/scobal/report.out"`
-| `format` | The format of the output file, eg: `"checkstyle"`
+| `inputs`          | A list of files, directories and/or globs (default is `["src"]`), eg: `["service.js", "src/controllers/", "**/*.js"]`
+| `config`          | The path to an eslint configuration file, eg: `"/home/scobal/esconfig"`
+| `noEslintrc`      |  Boolean to disable the use of .eslintrc, eg: `true`
+| `env`             | A list of environments as strings, eg: `["environment_1", "environment_2"]`
+| `ext`             | A list of Javascript file extensions as strings, eg: `[".js", ".jsx"]`
+| `global`          | A list of global variables as strings, eg: `["global_1", "global_1"]`
+| `parser`          | The parser to be used, eg: `"espree"`
+| `parserOptions`   | Specify parser options
+| `cache`           | Boolean to only check changed files, eg: `true`
+| `cacheFile`       | The path to an eslint cache file, eg: `"/tmp/eslint_cache/file"`
+| `cacheLocation`   | The path to an eslint cache file or directory, eg: `"/tmp/eslint_cache"`
+| `rulesDir`        | A list of directories with additional rules, eg: `["/eslint/rules_1", "/eslint/rules_2"]`
+| `plugin`          | A list of plugins as strings, eg: `["plugin_1", "plugin_2"]`
+| `rule`            | Specify rules
+| `outputFile`      | The path to the output file, eg: `"/home/scobal/report.out"`
+| `format`          | The format of the output file, eg: `"checkstyle"`
 
 ## License
 
